@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio — Alexander Pablo Trujillo Perez</title>
+  <meta name="description" content="Portafolio profesional — Analista de aprendizaje y soluciones ed‑tech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --guindo:#7A1333; /* original accent */
+      --p5-accent: #b81b2b; /* deep crimson */
+      --p5-accent-2: #ff4050; /* bright accent */
+      --p5-dark: #0b0f13; /* near black */
+      --p5-muted: #cbd5e1;
+      --card-bg: #0f172a;
+    }
+
+    /* Base fonts */
+    html,body{ font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+
+    /* Persona-5-esque theme (colors, headings and accents) */
+    body.p5-theme{
+      background: linear-gradient(180deg, rgba(184,27,43,0.06) 0%, rgba(0,0,0,0) 30%), #fff;
+      color: #e6eef8;
+    }
+
+    /* Header accent - upgraded visual treatment */
+    .header-boost{
+      background: linear-gradient(90deg, rgba(11,15,19,0.72), rgba(11,15,19,0.48));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(2,6,10,0.6);
+      position:relative;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      z-index:60;
+    }
+    .header-boost::after{
+      /* thin glowing strip that matches the ribbon */
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--p5-accent), var(--p5-accent-2));
+      filter: drop-shadow(0 6px 10px rgba(184,27,43,0.12));
+      pointer-events: none;
+    }
+
+    /* Logo */
+    .p5-logo{
+      color: var(--p5-accent-2);
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      padding: 0.18rem 0.5rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 8px;
+      transition: transform .16s ease, box-shadow .16s ease;
+      display:inline-block;
+    }
+    .p5-logo:hover{ transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 30px rgba(184,27,43,0.14); }
+
+    /* Nav links */
+    .nav-link{ color: rgba(255,255,255,0.92); padding: 0.4rem 0.6rem; border-radius: 8px; transition: background .12s ease, transform .12s ease; font-weight:600; }
+    .nav-link:hover{ background: rgba(255,255,255,0.03); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(184,27,43,0.06); }
+
+    /* Hablemos primary pill */
+    .hablemos-btn{ padding:0.5rem 0.9rem; border-radius:999px; background: linear-gradient(180deg,var(--p5-accent),var(--p5-accent-2)); color:#fff; border:2px solid rgba(255,255,255,0.06); box-shadow: 0 8px 0 rgba(11,15,19,0.12); font-weight:700; transition: transform .14s ease, box-shadow .14s ease; }
+    .hablemos-btn:hover{ transform: translateY(-3px); box-shadow: 0 18px 40px rgba(184,27,43,0.18); }
+
+    @media (min-width: 768px){
+      .nav-link{ font-size:0.95rem; }
+      .p5-logo{ font-size:1.25rem; }
+    }
+
+    /* Headings: bold, condensed, strong letter spacing */
+    .p5-hero h1, h2, h3{ font-family: 'Bebas Neue', Arial, sans-serif; color: #fff; letter-spacing: 0.02em; }
+    .p5-hero h1{ font-size: clamp(2rem, 4vw, 3.25rem); text-shadow: 0 6px 0 rgba(184,27,43,0.15); }
+
+    /* Cards: darker, with thin red outline */
+    .p5-card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0)); border-color: rgba(184,27,43,0.18); }
+    .p5-card h3{ color: var(--p5-accent-2); }
+
+    /* Buttons */
+    .btn-primary{ background: linear-gradient(180deg,var(--p5-accent),var(--p5-accent-2)); color:#fff; box-shadow: 0 6px 0 rgba(11,15,19,0.12); }
+    .btn-primary:hover{ transform: translateY(-2px); }
+    .btn-outline{ border-color: rgba(184,27,43,0.9); color:var(--p5-accent-2); }
+
+    /* Images: add subtle frame and overlay */
+    .p5-img{ box-shadow: 0 10px 30px rgba(11,15,19,0.25); border-left:6px solid rgba(184,27,43,0.12); }
+
+    /* Small device tweaks */
+    @media (max-width: 640px){
+      .p5-hero h1{ text-align:left; }
+      header{ padding-left:1rem; padding-right:1rem; }
+    }
+
+    /* Strong patterned background reminiscent of P5 (abstract, geometric) */
+    body.p5-theme{
+      background-color: #0b0f13;
+      background-image:
+        linear-gradient(135deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 8px),
+        linear-gradient(225deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 8px),
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.01), transparent 10%),
+        linear-gradient(180deg, rgba(184,27,43,0.03), rgba(0,0,0,0));
+      background-size: 16px 16px,16px 16px, 400px 400px, auto;
+      color: #fff;
+    }
+
+    /* Diagonal red ribbon across hero */
+    .hero-ribbon{ position: relative; margin-top: -2rem; margin-bottom: 1.5rem; }
+    .hero-ribbon::before{
+      content: '';
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      top: 6px;
+      height: 90px;
+      transform: rotate(-6deg);
+      background: linear-gradient(90deg,var(--p5-accent),var(--p5-accent-2));
+      border: 6px solid #fff; /* white framed look */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      z-index: 0;
+    }
+    .hero-ribbon .ribbon-inner{ position: relative; z-index: 2; display:flex; align-items:center; justify-content:center; gap:1rem; padding:1rem 2rem; }
+    .app-badge{ background:#0b0f13; color:#fff; padding:0.6rem 1rem; border-radius:8px; border:3px solid #fff; font-weight:700; display:inline-flex; gap:0.6rem; align-items:center; }
+    .app-badge small{ color:var(--p5-accent-2); font-weight:600; }
+
+    /* Cutout box style for headline fragments */
+    .cutout{ display:inline-block; background:#000; color:#fff; padding:0.12em 0.36em; transform:skewX(-8deg); box-shadow: 6px 8px 0 rgba(184,27,43,0.06); }
+    .cutout-inner{ display:inline-block; transform:skewX(8deg); }
+
+  /* Force dark text on light tiles inside p5 cards so readability remains high */
+  .p5-card .bg-slate-50{ color: var(--p5-dark) !important; }
+  .p5-card .bg-slate-50 a, .p5-card .bg-slate-50 p{ color: var(--p5-dark) !important; }
+  /* Slightly increase weight for readability */
+  .p5-card .bg-slate-50{ font-weight:600; }
+
+  /* Ensure any light tile uses dark text for contrast (contact card uses bg-slate-50) */
+  .bg-slate-50{ color: var(--p5-dark) !important; background-color:#fbfbfc; }
+  .bg-slate-50 a, .bg-slate-50 p, .bg-slate-50 h2, .bg-slate-50 h3, .bg-slate-50 span{ color: var(--p5-dark) !important; }
+
+  /* Contact card tweaks */
+  .p5-contact{ border-color: rgba(255,255,255,0.12); }
+  .p5-contact h2{ color: var(--p5-accent); font-family: 'Bebas Neue', Arial, sans-serif; text-transform:uppercase; }
+  .p5-contact p{ color: #334155; }
+  .p5-contact .btn-primary{ box-shadow:none; }
+
+    /* More Persona-5 style for project cards */
+    .p5-card{
+      background: linear-gradient(180deg, rgba(14,17,20,0.85), rgba(10,12,14,0.9));
+      border: 4px solid #fff; /* framed look */
+      position: relative;
+      overflow: visible;
+      padding-bottom: 0.25rem;
+    }
+    .p5-card::after{
+      /* thin inner border to create cutout feel */
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 2px solid rgba(184,27,43,0.08);
+      pointer-events: none;
+    }
+    .p5-card h3{ color:#fff; font-size:1.05rem; position:relative; z-index:3; }
+    .p5-card p{ color: #bfc9d6; }
+    .p5-card:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+
+    /* red diagonal accent in bottom-left of cards */
+    .p5-card .card-accent{ position:absolute; left:-30px; bottom: -22px; width:260px; height:60px; transform: rotate(-12deg); background: linear-gradient(90deg,var(--p5-accent),var(--p5-accent-2)); border:6px solid #fff; z-index:1; }
+
+    /* tag/badge on title */
+    .p5-tag{ display:inline-block; background:var(--p5-accent); color:#fff; padding:0.18rem 0.5rem; transform:skewX(-8deg); margin-right:0.6rem; font-weight:700; font-size:0.8rem; border-radius:4px; box-shadow: 4px 6px 0 rgba(0,0,0,0.35); }
+    .p5-tag .inner{ display:inline-block; transform:skewX(8deg); }
+
+    /* ensure the figures don't overflow the framed border visually */
+    .p5-card figure{ position:relative; z-index:2; overflow:hidden; }
+
+    /* Certificados: grid ligero y lightbox */
+    .cert-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .cert-card{
+      background: #fbfbfc;
+      border-radius: 12px;
+      padding: 0.5rem;
+      border: 3px solid rgba(255,255,255,0.06);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cert-card img{
+      width:100%;
+      height: auto;
+      object-fit:contain;
+      display:block;
+      max-height:200px;
+    }
+    .cert-card:hover{ transform: translateY(-6px) scale(1.02); box-shadow: 0 30px 60px rgba(0,0,0,0.6); cursor:pointer; }
+
+    /* Lightbox */
+    .cert-modal{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(4,6,8,0.7); z-index:9999; padding:2rem;
+    }
+    .cert-modal.open{ display:flex; }
+    .cert-modal img{ max-width:calc(100% - 4rem); max-height:calc(100% - 4rem); border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.8); }
+    .cert-modal .close{
+      position:absolute; right:2rem; top:1.5rem; background:var(--p5-accent); color:#fff; border-radius:6px; padding:0.35rem 0.6rem; font-weight:700;
+    }
+
+    /* Interactive micro-animations and mouse-responsive effects */
+    .interactive{ transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, opacity .28s ease; will-change: transform; transform-style: preserve-3d; }
+    .tilt-target{ perspective: 1200px; }
+    .tilt-target .tilt-inner{ transform-style: preserve-3d; transition: transform .28s cubic-bezier(.2,.9,.2,1); }
+
+    /* gentle floating for images */
+    .float-y{ animation: floatY 6s ease-in-out infinite; }
+    @keyframes floatY{ 0%{ transform: translateY(0px);} 50%{ transform: translateY(-8px);} 100%{ transform: translateY(0px);} }
+
+    /* subtle focus ring for interactive elements */
+    .interactive:focus{ outline: none; box-shadow: 0 0 0 4px rgba(184,27,43,0.12); transform: translateY(-4px); }
+
+    /* button micro-lift */
+    .nav-link, .hablemos-btn, .app-badge{ will-change: transform; transition: transform .18s ease, box-shadow .18s ease; }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .interactive, .tilt-target .tilt-inner, .float-y{ transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 p5-theme">
+  <a href="#main" class="sr-only focus:not-sr-only focus:!inline-block p-2 m-2 rounded bg-slate-800 text-white">Saltar al contenido</a>
+
+  <!-- Navbar (upgraded) -->
+  <header class="sticky top-0 header-boost">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="#" class="p5-logo">Alexander P. Trujillo</a>
+        <button data-nav-toggle class="sm:hidden p-2 rounded-md border border-transparent text-slate-300" aria-label="Abrir menú">☰</button>
+      </div>
+
+      <nav class="hidden sm:flex gap-4 items-center" aria-label="Navegación principal">
+        <a href="#proyectos" class="nav-link">Proyectos</a>
+        <a href="#experiencia" class="nav-link">Experiencia</a>
+        <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="#contacto" class="hablemos-btn">Hablemos</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+  <!-- Hero -->
+  <section class="max-w-6xl mx-auto px-4 pt-12 pb-8 grid md:grid-cols-2 gap-8 items-center p5-hero">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Estudiante y desarrollador en <span class="cutout"><span class="cutout-inner">Sistemas</span></span>. Construyo productos para mi universidad: apps Android con Firebase y chatbots RAG.</h1>
+        <p class="mt-4 text-slate-600">Android Studio · Firebase/Firestore · RAG con AnythingLLM/LangChain · Docker · CSS.</p>
+        <!-- hero action buttons removed (replaced by ribbon buttons below) -->
+        <!-- Ribbon with badges -->
+        <div class="hero-ribbon mt-8">
+          <div class="ribbon-inner max-w-4xl mx-auto">
+            <a href="#proyectos" class="app-badge btn-outline">Ver proyectos</a>
+            <a href="cv.pdf" class="app-badge btn-primary" download>Descargar CV</a>
+          </div>
+        </div>
+        
+      </div>
+  <div class="rounded-3xl border border-slate-200 p-6 shadow-sm p5-card">
+        <ul class="grid grid-cols-2 gap-3 text-sm">
+          <li class="p-3 rounded-xl bg-slate-50">App “Diplomados Ya!” publicada</li>
+          <li class="p-3 rounded-xl bg-slate-50">Chatbot RAG “UREALBOT”</li>
+          <li class="p-3 rounded-xl bg-slate-50">Colaboración en equipo</li>
+          <li class="p-3 rounded-xl bg-slate-50">+4 años de carrera</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl md:text-3xl font-bold">Proyectos destacados</h2>
+      <p class="text-slate-600 mt-2">Selecciona 4–6. Cada tarjeta debe llevar a un caso detallado (puede ser otra página o un PDF).</p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+  <!-- Card → Diplomados Ya! -->
+  <article class="rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition p5-card">
+          <figure class="aspect-video bg-slate-100 flex items-center justify-center">
+            <picture>
+              <source srcset="img/diplomados-1.jpg" type="image/jpeg">
+              <img src="img/diplomados-1.svg" alt="Mockup Diplomados Ya" loading="lazy" class="w-full h-full object-cover">
+            </picture>
+          </figure>
+          <div class="p-5">
+            <span class="p5-tag"><span class="inner">App</span></span>
+            <h3 class="font-semibold">Diplomados Ya! — Android + Firebase</h3>
+            <p class="text-sm text-slate-600 mt-1">App oficial para explorar diplomados UREAL. Autenticación, Firestore, publicación en Play Store. Trabajo en colaboración.</p>
+            <div class="mt-3 flex items-center gap-3 text-sm">
+              <a href="#" class="underline">Caso de estudio</a>
+              <a href="https://play.google.com/store/apps/details?id=bo.ureal.diplomadosya" class="underline" target="_blank" rel="noreferrer noopener">Play Store</a>
+            </div>
+          </div>
+          <div class="card-accent" aria-hidden="true"></div>
+        </article>
+
+  <!-- Card → UREALBOT -->
+  <article class="rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition p5-card">
+          <div class="grid grid-cols-2 gap-0">
+            <figure class="aspect-video bg-slate-100 flex items-center justify-center p5-img">
+              <picture>
+                <source srcset="img/urealbot-1.jpg" type="image/jpeg">
+                <img src="img/urealbot-1.svg" alt="Captura UREALBOT 1" loading="lazy" class="w-full h-full object-cover">
+              </picture>
+            </figure>
+            <figure class="aspect-video bg-slate-100 flex items-center justify-center p5-img">
+              <picture>
+                <source srcset="img/urealbot-2.jpg" type="image/jpeg">
+                <img src="img/urealbot-2.svg" alt="Captura UREALBOT 2" loading="lazy" class="w-full h-full object-cover">
+              </picture>
+            </figure>
+          </div>
+          <div class="p-5">
+            <span class="p5-tag"><span class="inner">AI</span></span>
+            <h3 class="font-semibold">UREALBOT — Chatbot RAG</h3>
+            <p class="text-sm text-slate-600 mt-1">Asistente con AnythingLLM + LangChain + Docker. Respuestas con fuentes de la web UREAL; front con CSS.</p>
+            <div class="mt-3 flex items-center gap-3 text-sm">
+              <a href="#" class="underline">Caso de estudio</a>
+            </div>
+          </div>
+          <div class="card-accent" aria-hidden="true"></div>
+        </article>
+
+  <!-- (Se eliminaron 3 tarjetas de proyecto solicitadas) -->
+      </div>
+    </section>
+
+    <!-- Experiencia -->
+    <section id="experiencia" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl md:text-3xl font-bold">Experiencia</h2>
+      <ul class="mt-4 space-y-4">
+        <li class="p-5 rounded-2xl border border-slate-200">
+          <div class="font-semibold">Auxiliar / Desarrollador en Sistemas — Universidad Real</div>
+          <div class="text-sm text-slate-600">2021–Presente · Bolivia</div>
+          <p class="text-sm mt-2">Desarrollo de aplicaciones internas (Android + Firebase) y chatbots RAG. Soporte a áreas académicas.</p>
+        </li>
+        <li class="p-5 rounded-2xl border border-slate-200">
+          <div class="font-semibold">Estudiante de Ingeniería de Sistemas — UREAL</div>
+          <div class="text-sm text-slate-600">2021–Presente</div>
+          <p class="text-sm mt-2">Cursando 4º año. Enfocado en construir soluciones reales fuera del aula.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Sobre mí -->
+    <section id="sobre-mi" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl md:text-3xl font-bold">Sobre mí</h2>
+      <p class="mt-3 text-slate-700">Soy Alexander Pablo Trujillo Perez: estudiante de 4º año y auxiliar/desarrollador en Sistemas. Aprendo construyendo: apps Android con Firebase y asistentes RAG para resolver necesidades reales de mi universidad. Me gusta trabajar en equipo y documentar lo que hago.</p>
+    </section>
+
+    <!-- Certificados -->
+    <section id="certificados" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl md:text-3xl font-bold">Certificados</h2>
+      <p class="text-slate-600 mt-2">Aquí están algunos de mis certificados y reconocimientos. Haz clic para ver en tamaño completo.</p>
+
+      <div class="cert-grid mt-6">
+        <!-- PDF cards use a small SVG preview; image cards show the image -->
+        <div class="cert-card" data-src="Certificados/ARTE.pdf" role="button" aria-label="Ver certificado ARTE">
+          <div style="text-align:center;">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="3" fill="#0b0f13" />
+              <path d="M7 7h6l3 3v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z" fill="#ff4050" opacity=".95"/>
+              <text x="12" y="17" fill="#fff" font-size="6" font-family="Inter" text-anchor="middle">PDF</text>
+            </svg>
+            <div style="font-size:0.85rem;margin-top:0.35rem;color:var(--p5-dark);">ARTE.pdf</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-src="Certificados/COACHING.pdf" role="button" aria-label="Ver certificado COACHING">
+          <div style="text-align:center;">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="3" fill="#0b0f13" />
+              <path d="M7 7h6l3 3v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z" fill="#ff4050" opacity=".95"/>
+              <text x="12" y="17" fill="#fff" font-size="6" font-family="Inter" text-anchor="middle">PDF</text>
+            </svg>
+            <div style="font-size:0.85rem;margin-top:0.35rem;color:var(--p5-dark);">COACHING.pdf</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-src="Certificados/EMOCIONAL.pdf" role="button" aria-label="Ver certificado EMOCIONAL">
+          <div style="text-align:center;">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="3" fill="#0b0f13" />
+              <path d="M7 7h6l3 3v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z" fill="#ff4050" opacity=".95"/>
+              <text x="12" y="17" fill="#fff" font-size="6" font-family="Inter" text-anchor="middle">PDF</text>
+            </svg>
+            <div style="font-size:0.85rem;margin-top:0.35rem;color:var(--p5-dark);">EMOCIONAL.pdf</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-src="Certificados/FERIA%20A%20LA%20INVERSA.pdf" role="button" aria-label="Ver certificado FERIA A LA INVERSA">
+          <div style="text-align:center;">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="3" fill="#0b0f13" />
+              <path d="M7 7h6l3 3v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z" fill="#ff4050" opacity=".95"/>
+              <text x="12" y="17" fill="#fff" font-size="6" font-family="Inter" text-anchor="middle">PDF</text>
+            </svg>
+            <div style="font-size:0.85rem;margin-top:0.35rem;color:var(--p5-dark);">FERIA A LA INVERSA.pdf</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-src="Certificados/Hackaton.jpg" role="button" aria-label="Ver certificado Hackaton">
+          <img src="Certificados/Hackaton.jpg" alt="Hackaton" loading="lazy">
+        </div>
+
+        <div class="cert-card" data-src="Certificados/PRIMEROS%20AUX.pdf" role="button" aria-label="Ver certificado PRIMEROS AUX">
+          <div style="text-align:center;">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="3" fill="#0b0f13" />
+              <path d="M7 7h6l3 3v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z" fill="#ff4050" opacity=".95"/>
+              <text x="12" y="17" fill="#fff" font-size="6" font-family="Inter" text-anchor="middle">PDF</text>
+            </svg>
+            <div style="font-size:0.85rem;margin-top:0.35rem;color:var(--p5-dark);">PRIMEROS AUX.pdf</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="max-w-6xl mx-auto px-4 py-12">
+      <div class="rounded-3xl border border-slate-200 p-8 bg-slate-50 p5-contact">
+        <h2 class="text-2xl md:text-3xl font-bold">¿Hablamos?</h2>
+        <p class="mt-2 text-slate-600">Cuéntame tu reto. Respondo rápido.</p>
+        <div class="mt-5 flex flex-col sm:flex-row gap-3">
+          <a href="mailto:alexpablo20000@gmail.com" class="px-4 py-3 rounded-2xl text-white text-center btn-primary">Enviar correo</a>
+          <a href="https://wa.me/59169834202" target="_blank" rel="noreferrer noopener" class="px-4 py-3 rounded-2xl border btn-outline text-center">WhatsApp</a>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">Reemplaza los enlaces con tus datos reales.</p>
+      </div>
+    </section>
+
+    <footer class="py-10 text-center text-xs text-slate-500 border-t">© <span id="year"></span> Alexander Pablo Trujillo Perez. Todos los derechos reservados.</footer>
+  </main>
+
+  <script>
+    // Año en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple: toggle nav on small screens (progressive enhancement)
+    (function(){
+      var btn = document.querySelector('[data-nav-toggle]');
+      var nav = document.querySelector('nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', function(){ nav.classList.toggle('hidden'); });
+    })();
+
+    /* Certificados: lightbox que soporta imágenes y PDFs */
+    (function(){
+      function isPdf(url){ return /\.pdf(\?|#|$)/i.test(url); }
+
+      var cards = document.querySelectorAll('.cert-card');
+      if(!cards || cards.length === 0) return;
+
+      // crear modal dinámicamente para evitar romper estructura previa si ya existe
+      var modal = document.createElement('div');
+      modal.id = 'cert-modal';
+      modal.className = 'cert-modal';
+      modal.setAttribute('role','dialog');
+      modal.setAttribute('aria-hidden','true');
+      modal.innerHTML = '\n        <button class="close" id="cert-close" aria-label="Cerrar">X</button>\n        <div id="cert-modal-content" style="width:100%;max-width:1100px;max-height:100%;display:flex;align-items:center;justify-content:center;">\n          <img id="cert-modal-img" src="" alt="Certificado ampliado" style="display:none;max-width:calc(100% - 4rem);max-height:calc(100% - 4rem);border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.8);">\n          <iframe id="cert-modal-pdf" src="" style="display:none;width:100%;height:90vh;border:0;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.8);" title="Visor PDF"></iframe>\n        </div>\n      ';
+      document.body.appendChild(modal);
+
+      var modalImg = document.getElementById('cert-modal-img');
+      var modalPdf = document.getElementById('cert-modal-pdf');
+      var closeBtn = document.getElementById('cert-close');
+
+      function openModal(src){
+        if(isPdf(src)){
+          modalImg.style.display = 'none';
+          modalPdf.style.display = 'block';
+          modalPdf.src = src + '#toolbar=0';
+        } else {
+          modalPdf.style.display = 'none';
+          modalPdf.src = '';
+          modalImg.style.display = 'block';
+          modalImg.src = src;
+        }
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        modalImg.src = '';
+        modalImg.style.display = 'none';
+        modalPdf.src = '';
+        modalPdf.style.display = 'none';
+      }
+
+      cards.forEach(function(c){
+        c.addEventListener('click', function(){
+          var src = c.getAttribute('data-src') || c.querySelector('img')?.src;
+          if(!src) return;
+          openModal(src);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+    })();
+    
+      /* Mouse-responsive tilt & parallax (gentle) */
+      (function(){
+        if(window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // respect preferences
+
+        function applyTilt(el, e, strength){
+          var rect = el.getBoundingClientRect();
+          var relX = (e.clientX - rect.left) / rect.width - 0.5;
+          var relY = (e.clientY - rect.top) / rect.height - 0.5;
+          var rotateX = (relY * -1) * (strength || 8);
+          var rotateY = relX * (strength || 8);
+          el.style.transform = 'rotateX('+rotateX.toFixed(2)+'deg) rotateY('+rotateY.toFixed(2)+'deg) translateZ(6px)';
+        }
+
+        var tiltEls = document.querySelectorAll('.tilt-target');
+        tiltEls.forEach(function(t){
+          var inner = t.querySelector('.tilt-inner') || t;
+          t.addEventListener('mousemove', function(e){ applyTilt(inner, e, 8); });
+          t.addEventListener('mouseleave', function(){ inner.style.transform = ''; });
+        });
+
+        // ribbon parallax
+        var ribbon = document.querySelector('.hero-ribbon');
+        if(ribbon){
+          ribbon.addEventListener('mousemove', function(e){
+            var inner = ribbon.querySelector('.ribbon-inner');
+            var rect = ribbon.getBoundingClientRect();
+            var px = (e.clientX - rect.left) / rect.width - 0.5;
+            inner.style.transform = 'translateX(' + (px * 10) + 'px)';
+          });
+          ribbon.addEventListener('mouseleave', function(){ var inner = ribbon.querySelector('.ribbon-inner'); if(inner) inner.style.transform = ''; });
+        }
+      })();
+  </script>
+</body>
+</html>
